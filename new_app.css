@@ -1,0 +1,524 @@
+/* App.css */
+
+html, body {
+  height: 100%; /* HTML ve body'nin yüksekliğini tam ekran yap */
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #000428, #004e92);
+  overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
+  color: #fff;
+  cursor: default; /* Fare imlecini varsayılan yap */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  min-height: 100vh; /* İçerik az olsa bile en az ekran yüksekliği kadar olmasını sağlar */
+  box-sizing: border-box; /* Padding'in toplam yüksekliği etkilememesi için */
+}
+
+.interactive-bg {
+  animation: backgroundAnimation 20s ease-in-out infinite alternate;
+  background-size: 200% 200%;
+}
+
+@keyframes backgroundAnimation {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* MouseTrail için fadeOutTrail animasyonunu koruyoruz, ancak MouseTrail bileşeni kaldırılacak */
+@keyframes fadeOutTrail {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(2); }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 30px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #444;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box; /* Padding'in genişliği etkilememesi için */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  user-select: none;
+  color: #00ffff; /* Logo rengini belirginleştir */
+  text-shadow: 0 0 8px #00ffff;
+}
+
+/* Arama kutusu ve büyüteç ikonu */
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dance-input {
+  padding: 8px 36px 8px 12px; /* Sağda büyüteç için boşluk */
+  border-radius: 12px;
+  border: 2px solid #00ffff;
+  outline: none;
+  width: 250px;
+  background: #0a1a2a; /* koyu mavi ton */
+  color: #00ffff;
+  font-weight: 600;
+  font-size: 14px;
+  position: relative;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: inset 0 0 8px #00ffff;
+}
+
+.dance-input:focus {
+  box-shadow: 0 0 15px #00ffff;
+  border-color: #00ffff;
+  background: #06203a;
+  color: #00ffff;
+}
+
+.input-wrapper svg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  stroke: #00ffff;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.dance-input:focus + svg {
+  opacity: 1;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Genel buton stili */
+button {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.music-controls button {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 8px 16px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.music-controls button:hover {
+  background-color: #00ffff;
+  color: #000;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+.music-controls input[type="range"] {
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-appearance: none; /* Varsayılan stili kaldır */
+  width: 120px; /* Genişlik */
+  height: 8px; /* Kalınlık */
+  background: #004d4d; /* Arka plan rengi */
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+.music-controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; /* Başparmak boyutu */
+  height: 20px; /* Başparmak boyutu */
+  border-radius: 50%;
+  background: #00ffff; /* Başparmak rengi */
+  cursor: grab;
+  box-shadow: 0 0 8px #00ffff;
+}
+
+.music-controls input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #00ffff;
+  cursor: grab;
+  box-shadow: 0 0 8px #00ffff;
+}
+
+
+.start-screen {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  margin-top: 150px;
+  animation: zoomIn 1s forwards;
+  user-select: none;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.6); /* Başlangıç ekranına gölge */
+}
+
+.start-screen .title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; /* Daha belirgin gölge */
+}
+
+.start-button {
+  padding: 15px 40px; /* Daha büyük buton */
+  border-radius: 30px;
+  background: linear-gradient(45deg, #00b894, #00e676); /* Gradyan arka plan */
+  color: white;
+  font-size: 20px; /* Daha büyük font */
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 184, 148, 0.6), inset 0 -4px 8px rgba(0, 150, 120, 0.8); /* Daha belirgin gölge */
+  letter-spacing: 1px;
+}
+
+.start-button:hover {
+  background: linear-gradient(45deg, #019875, #00c853);
+  box-shadow: 0 10px 25px rgba(0, 184, 148, 0.8), inset 0 -5px 10px rgba(0, 150, 120, 0.9);
+  transform: translateY(-3px); /* Hafif yukarı kalkma efekti */
+}
+
+.start-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(0, 184, 148, 0.4), inset 0 -2px 4px rgba(0, 150, 120, 0.6);
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.video-section {
+  position: relative;
+  margin-top: 20px;
+  text-align: center;
+  display: flex; /* İçindeki videoları yan yana hizalamak için */
+  justify-content: center;
+  align-items: flex-start; /* Videoların üstten hizalanması için */
+  gap: 30px;
+  flex-wrap: wrap; /* Küçük ekranlarda alt alta geçiş için */
+}
+
+.video-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Video boyutlarını küçülttük */
+.video-active {
+  width: 420px; /* Yeni genişlik */
+  height: 465px; /* Yeni yükseklik */
+  border-radius: 20px;
+  border: 4px solid #00bcd4;
+  box-shadow: 0 0 25px #00bcd4;
+  user-select: none;
+}
+
+/* Doğruluk Çubuğu */
+.accuracy-bar-container {
+  width: 30px; /* Çubuğun genişliği */
+  height: 465px; /* Video yüksekliği ile aynı */
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid #00ffff;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-left: 20px; /* Video ile arasında boşluk */
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.accuracy-bar-fill {
+  width: 100%;
+  background: linear-gradient(to top, #ff0000, #ffff00, #00ff00); /* Kırmızıdan yeşile gradyan */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: height 0.5s ease-out; /* Doluluk değişimine animasyon */
+  border-radius: 0 0 13px 13px; /* Alt köşeleri yuvarlak tut */
+}
+
+
+.chatbot-box {
+  position: fixed;
+  left: 90px;
+  bottom: 20px;
+  width: 320px;
+  height: 400px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 0 15px rgba(0,255,255,0.7);
+  animation: slideUp 0.5s ease forwards;
+  user-select: none;
+  z-index: 10001;
+}
+
+/* Yeni Müzik Değiştirme Paneli */
+.music-changer-panel {
+  position: fixed;
+  left: 20px;
+  bottom: 90px; /* Chatbot butonunun biraz üstünde */
+  width: 120px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+  z-index: 10000;
+}
+
+.music-changer-panel button {
+  background: linear-gradient(45deg, #007bff, #00c0ff); /* Mavi gradyan */
+  color: white;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+}
+
+.music-changer-panel button:hover {
+  background: linear-gradient(45deg, #0056b3, #0099cc);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.6);
+  transform: translateY(-2px);
+}
+.music-changer-panel button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 123, 255, 0.2);
+}
+
+
+@keyframes slideUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #00ffff;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 250px;
+  padding: 5px 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #00ffff transparent;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #00ffff;
+  border-radius: 3px;
+}
+
+/* Chat mesajları için genel stil */
+.chat-messages > div {
+  margin-bottom: 6px;
+}
+
+.chat-messages > div > span {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-size: 14px;
+}
+
+/* Bot mesajları */
+.chat-messages > div[style*="text-align: left"] > span {
+  background-color: #004d4d;
+  color: #fff;
+}
+
+/* Kullanıcı mesajları */
+.chat-messages > div[style*="text-align: right"] > span {
+  background-color: #00cccc;
+  color: #000;
+}
+
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: rgba(0, 255, 255, 0.1);
+  color: #00ffff;
+  border: 1px solid #00ffff;
+}
+
+.chat-input input::placeholder {
+  color: #00ccccaa;
+  font-style: italic;
+}
+
+.chat-input button {
+  padding: 10px 16px;
+  background: linear-gradient(45deg, #6c5ce7, #a29bfe); /* Gradyan */
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.chat-input button:hover {
+  background: linear-gradient(45deg, #4834d4, #8176e7);
+  box-shadow: 0 6px 15px rgba(108, 92, 231, 0.6);
+  transform: translateY(-2px);
+}
+.chat-input button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(108, 92, 231, 0.3);
+}
+
+button:focus, input:focus {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
+
+/* Chat butonu */
+
+button[aria-label="Chatbot aç/kapa"] {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background: radial-gradient(circle at center, #00ffff, #00cccc); /* Radyal gradyan */
+  box-shadow: 0 0 15px #00ffff, 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+button[aria-label="Chatbot aç/kapa"]:hover {
+  box-shadow: 0 0 25px #00ffff, 0 0 40px #00ffff, 0 0 60px rgba(0, 255, 255, 0.8);
+  transform: scale(1.05); /* Hafif büyüme */
+}
+button[aria-label="Chatbot aç/kapa"]:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px #00ffff, 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+
+.video-controls {
+  display: flex;
+  gap: 15px; /* Butonlar arası boşluk */
+  margin-top: 15px;
+}
+
+.video-controls button {
+  background: linear-gradient(135deg, #00ffff, #008b8b);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 22px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 10px rgba(0, 255, 255, 0.3),
+    0 0 20px #00ffff77,
+    inset 0 -3px 8px rgba(0, 204, 204, 0.6);
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  filter: drop-shadow(0 0 3px #00ffffaa);
+  min-width: 100px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.video-controls button:hover {
+  background: linear-gradient(135deg, #00ffffdd, #00bbbbdd);
+  color: #004d4d;
+  box-shadow:
+    0 0 12px #00ffffee,
+    0 0 30px #00ffffcc,
+    inset 0 -2px 8px #00eeeecc;
+  transform: scale(1.05);
+}
+
+.video-controls button:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 0 6px #00bbbbcc,
+    inset 0 -1px 4px #009999cc;
+  color: #002d2d;
+}
+
+.video-controls button:focus {
+  outline: 2px solid #00ffff;
+  outline-offset: 3px;
+}
+
+/* Sonraki Dans Hareketi butonu */
+.next-dance-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #6a0572, #8e2de2); /* Mor gradyan */
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(106, 5, 114, 0.6), inset 0 -4px 8px rgba(70, 0, 75, 0.8);
+  letter-spacing: 1px;
+  margin-top: 30px; /* Diğer elementlerden biraz daha boşluk */
+}
+
+.next-dance-button:hover {
+  background: linear-gradient(45deg, #8e2de2, #a742e7);
+  box-shadow: 0 10px 25px rgba(106, 5, 114, 0.8), inset 0 -5px 10px rgba(70, 0, 75, 0.9);
+  transform: translateY(-3px);
+}
+
+.next-dance-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(106, 5, 114, 0.4), inset 0 -2px 4px rgba(70, 0, 75, 0.6);
+}
