@@ -4,6 +4,17 @@ from flask_cors import CORS
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv # .env dosyasını yüklemek için
+import VoiceChat from './VoiceChat';
+import React from 'react';
+
+
+function App() {
+  return (
+    <div>
+      <VoiceChat />
+    </div>
+  );
+}
 
 # .env dosyasını yükle
 load_dotenv()
