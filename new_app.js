@@ -4,15 +4,6 @@ import { Camera } from '@mediapipe/camera_utils';
 import VoiceChat from "./VoiceChat";
 import './App.css';
 
-//sesli komut
-function App() {
-  return (
-    <div>
-      <h1>Gemini Sesli Asistan</h1>
-      <VoiceChat />
-    </div>
-  );
-}
 
 
 // ChatIcon bileşeni
